@@ -5,10 +5,10 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  subscription: Visual Studio Enterprise(17b12858-3960-4e6f-a663-a06fdae23428)
-  resourceGroup: resourcegroup-tfstate
-  storageAccount: terraformtfstateskip
-  container: tfstate
+  subscription: Pay-As-You-Go(2a784b7d-64c7-4f97-aa5a-a1294830a0cc)
+  resourceGroup: rg-tfstate
+  storageAccount: strogeterraform
+  container: ctterraform
   tfstateFile: terraform.tfstate
   anyTfChanges: false
 
@@ -37,8 +37,7 @@ steps:
     provider: 'azurerm'
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/skip-step'
-    commandOptions: '-out=tfplan'
-    # commandOptions: '-detailed-exitcode -out=tfplan'
+    commandOptions: '-out=$logs'
     environmentServiceNameAzureRM: '$(subscription)'
 
 - task: PowerShell@2
